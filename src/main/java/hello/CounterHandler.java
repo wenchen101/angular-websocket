@@ -1,9 +1,13 @@
 package hello;
 
+import com.google.common.util.concurrent.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
+
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
 
 @Component
 public class CounterHandler extends TextWebSocketHandler {
@@ -39,6 +43,34 @@ public class CounterHandler extends TextWebSocketHandler {
         } else {
             System.out.println("Received:" + message.getPayload());
         }
+    }
+
+    private void handleJob(){
+        ListeningExecutorService service = MoreExecutors.listeningDecorator(Executors.newFixedThreadPool(10));
+        ListenableFuture<Explosion> explosion = service.submit(new Callable<Explosion>() {
+            public Explosion call() {
+                return pushBigRedButton();
+            }
+        });
+        Futures.addCallback(explosion, new FutureCallback<Explosion>() {
+            // we want this handler to run immediately after we push the big red button!
+            public void onSuccess(Explosion explosion) {
+                walkAwayFrom(explosion);
+            }
+            public void onFailure(Throwable thrown) {
+                battleArchNemesis(); // escaped the explosion!
+            }
+        });
+    }
+
+    private Explosion pushBigRedButton(){
+        return null;
+    }
+
+    private void  walkAwayFrom(Explosion explosion){
+    }
+
+    private void  battleArchNemesis(){
     }
 
 }
