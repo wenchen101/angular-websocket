@@ -14,7 +14,7 @@ public class CounterService {
     @Autowired
     CounterHandler counterHandler;
 
-    @Scheduled(fixedDelay = 1000)
+    @Scheduled(fixedDelay = 5000)
     public void sendCounterUpdate() {
         counterHandler.counterIncrementedCallback(counter.incrementAndGet());
     }

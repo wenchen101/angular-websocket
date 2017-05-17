@@ -31,7 +31,27 @@
             $scope.searchText = {value: ''};
 
             $scope.$broadcast('hello',{arg:'aa'});
+            receiveData();
         };
+
+        function receiveData(){
+             var dataStream = $websocket('ws://localhost:8088/counter');
+
+              var collection = [];
+
+              dataStream.onMessage(function(message) {
+                  var data = JSON.parse(message.data);
+                  console.log(data);
+//                collection.push();
+              });
+
+              var methods = {
+                collection: collection,
+                get: function() {
+                  dataStream.send(JSON.stringify({ action: 'get' }));
+                }
+              };
+        }
 
         $scope.toDataBase =function(){
             var url='database/save';
