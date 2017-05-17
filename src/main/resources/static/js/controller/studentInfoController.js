@@ -10,7 +10,7 @@
         this.address = address || '';
     }
 
-    angular.module('app').controller('studentInfoController', ['$scope','view', '$http', function ($scope,view,$http) {
+    angular.module('app').controller('studentInfoController', ['$scope','view', '$http','$websocket', function ($scope,view,$http,$websocket) {
 
         $scope.init = function () {
             $scope.students = [

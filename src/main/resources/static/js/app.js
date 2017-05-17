@@ -1,6 +1,6 @@
 (function () {
     //IIFE
-    var app = angular.module('app', ['ui.router']);
+    var app = angular.module('app', ['ui.router','ngWebSocket']);
 
     app.config(function ($stateProvider, $urlRouterProvider) {
         // For any unmatched url, redirect to /state1

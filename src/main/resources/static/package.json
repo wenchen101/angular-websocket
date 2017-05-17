@@ -18,5 +18,8 @@
   "license": "MIT",
   "devDependencies": {
     "gulp": "^3.9.0"
+  },
+  "dependencies": {
+    "angular-websocket": "~2.0.1"
   }
 }
